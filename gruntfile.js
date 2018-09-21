@@ -10,14 +10,13 @@ module.exports = function (grunt) {
                     sourcemap: true,
                     environment: 'production',
                     httpPath: 'prod/client/',
-                    cssDir: 'prod/client/css/'
+                    cssDir: 'prod/client/assets/css/'
                 },
             },
         },
         babel: {
             build: {
                 files: [{
-                    //'src/assets/min/app.js': 'src/assets/js/*.js'
                     expand: true,
                     cwd: 'src/assets/js/',
                     src: ['*.js'],
@@ -32,9 +31,8 @@ module.exports = function (grunt) {
             },
             build: {
                 files: [{
-                    //'prod/client/app.min.js': 'src/assets/min/*.js'
                     src: 'src/assets/min/*.js',
-                    dest: 'prod/client/app.min.js'
+                    dest: 'prod/client/assets/js/app.min.js'
                 }]
             }
         },
