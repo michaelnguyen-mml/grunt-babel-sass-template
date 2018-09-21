@@ -14,6 +14,23 @@ module.exports = function (grunt) {
                 },
             },
         },
+        postcss: {
+            options: {
+                map: true,
+                processors: [
+                    require('autoprefixer')({browsers: ['last 1 version']})
+                ]
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'prod/client/assets/css/',
+                    src: ['*.css'],
+                    dest: 'prod/client/assets/css',
+                    ext: '.css'
+                }]
+            }
+        },
         babel: {
             build: {
                 files: [{
@@ -36,16 +53,25 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        clean: {
+            // Be very careful with this, could end up wiping everything if not configured properly
+            // Will delete everything from the src/assets/js folder once uglify is done.
+            all_min_js : ['src/assets/min/*.js'],
+            //Delete min folder once done
+            min_folder: ['src/assets/min/']
+        },
+
         watch: {
             files: ['src/assets/scss/*.scss', 'src/assets/js/*.js'],
-            tasks: ['compass', 'babel', 'uglify'],
+            tasks: ['compass', 'babel', 'uglify', 'clean'],
         }
     });
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['compass', 'babel', 'uglify', 'watch']);
-
+    grunt.registerTask('default', ['compass', 'postcss', 'babel', 'uglify', 'clean', 'watch']);
 };
