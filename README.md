@@ -37,11 +37,15 @@ However, JavaScript files should already be compiled from ES5+ to JS, minified a
 
 # Issues / Errors
  Compass related
- Install compass
- | OS | Commands |
-| ------ | ------ |
-|Windows|gem install compass|
-|Mac OS| sudo gem install compass|
+```sh
+MacOS
+sudo gem install compass
+```
+
+```sh
+Windows
+gem install compass
+```
 
 If Sass is not installed
 ```sh
